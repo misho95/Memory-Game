@@ -19,7 +19,7 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
   const [playerActive, setPlayerActive] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  console.log(activeTheme);
+  console.log(activeTheme, setPlayerActive);
 
   useEffect(() => {
     console.log(activePlayers);
