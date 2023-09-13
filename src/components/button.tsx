@@ -1,4 +1,12 @@
-const Button = ({ id, text, width, active, setActive }) => {
+interface PropsType {
+  id: number;
+  text: string;
+  width: string;
+  active: number;
+  setActive: (id: number) => void;
+}
+
+const Button = ({ id, text, width, active, setActive }: PropsType) => {
   return (
     <button
       onClick={() => setActive(id)}

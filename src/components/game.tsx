@@ -1,7 +1,38 @@
+import { useEffect, useState } from "react";
 import Board from "./board";
 import Players from "./players";
 
-const Game = () => {
+interface PropsType {
+  activeTheme: number;
+  activePlayers: number;
+  activeSize: number;
+}
+
+const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
+  interface playersType {
+    id: number;
+    player: string;
+    score: number;
+  }
+
+  const [players, setPlayers] = useState<playersType[]>([]);
+  const [playerActive, setPlayerActive] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  console.log(activeTheme);
+
+  useEffect(() => {
+    console.log(activePlayers);
+    const data: playersType[] = [];
+    for (let i = 0; i < activePlayers; i++) {
+      data.push({ id: i, player: `player ${i + 1}`, score: 0 });
+    }
+
+    const casterData: playersType[] = data as playersType[];
+    setPlayers(casterData);
+    setLoading(false);
+  }, [activePlayers]);
+
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-gray">
       <div className="flex flex-col w-w1110 gap-10">
@@ -16,14 +47,21 @@ const Game = () => {
             </button>
           </div>
         </div>
-        <div>
-          <Board />
+        <div className="flex justify-center items-center">
+          <Board activeSize={activeSize} />
         </div>
-        <div className="flex justify-between gap-3">
-          <Players active={false} text={"Player 1"} score={4} />
-          <Players active={true} text={"Player 2"} score={5} />
-          <Players active={false} text={"Player 3"} score={2} />
-          <Players active={false} text={"Player 4"} score={0} />
+        <div className="flex justify-center gap-8">
+          {!loading &&
+            players.map((p) => {
+              return (
+                <Players
+                  id={p.id}
+                  active={playerActive}
+                  text={p.player}
+                  score={p.score}
+                />
+              );
+            })}
         </div>
       </div>
     </div>

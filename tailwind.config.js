@@ -11,9 +11,11 @@ export default {
         w134: "134px",
         w127: "127px",
         w119: "119px",
+        w82: "82px",
         w62: "62px",
       },
       height: {
+        h82: "82px",
         h72: "72px",
       },
       colors: {

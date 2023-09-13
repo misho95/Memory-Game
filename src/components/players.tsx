@@ -1,12 +1,12 @@
-const Players = ({ active, text, score }) => {
+const Players = ({ id, active, text, score }) => {
   return (
     <div className="flex flex-col gap-3">
       <div
         className={`w-w256 h-h72 ${
-          active ? "bg-yellow" : "bg-blueLigher"
+          active === id ? "bg-yellow" : "bg-blueLigher"
         } rounded-lg flex justify-between items-center p-6 relative`}
       >
-        {active && (
+        {active === id && (
           <div
             className="absolute -top-5 left-1/2 -translate-x-1/2 w-0 h-0 
   border-l-[18px] border-l-transparent
@@ -16,7 +16,7 @@ const Players = ({ active, text, score }) => {
         )}
         <span
           className={`${
-            active ? "text-white" : "text-blueLight"
+            active === id ? "text-white" : "text-blueLight"
           } select-none text-lg`}
         >
           {text}
@@ -29,7 +29,7 @@ const Players = ({ active, text, score }) => {
           {score}
         </span>
       </div>
-      {active && (
+      {active === id && (
         <div className="text-blue text-center font-semibold">Current Turn</div>
       )}
     </div>

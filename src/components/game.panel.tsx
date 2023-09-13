@@ -1,7 +1,15 @@
 import Button from "./button";
 import { useState } from "react";
 
-const GamePanel = ({ game }) => {
+interface PropsType {
+  game: (
+    activeTheme: number,
+    activePlayers: number,
+    activeSize: number
+  ) => void;
+}
+
+const GamePanel = ({ game }: PropsType) => {
   const [activeTheme, setActiveTheme] = useState(1);
   const [activePlayers, setActivePlayers] = useState(1);
   const [activeSize, setActiveSize] = useState(1);
