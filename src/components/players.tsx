@@ -1,4 +1,11 @@
-const Players = ({ id, active, text, score }) => {
+interface PropsType {
+  id: number;
+  active: number;
+  text: string;
+  score: number;
+}
+
+const Players = ({ id, active, text, score }: PropsType) => {
   return (
     <div className="flex flex-col gap-3">
       <div
