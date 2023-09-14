@@ -17,7 +17,6 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
 
   const [players, setPlayers] = useState<playersType[]>([]);
   const [playerActive, setPlayerActive] = useState(0);
-  const [loading, setLoading] = useState(true);
 
   console.log(activeTheme, setPlayerActive);
 
@@ -30,14 +29,13 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
 
     const casterData: playersType[] = data as playersType[];
     setPlayers(casterData);
-    setLoading(false);
   }, [activePlayers]);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-gray">
       <div className="flex flex-col w-w1110 gap-10">
         <div className="flex justify-between">
-          <h1 className="text-blue text-xl font-bold">MEMORY</h1>
+          <h1 className="text-blue text-xl font-bold select-none">MEMORY</h1>
           <div className="flex gap-3">
             <button className="bg-yellow w-w127 py-2 rounded-full text-white">
               Restart
@@ -51,7 +49,7 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
           <Board activeSize={activeSize} />
         </div>
         <div className="flex justify-center gap-8">
-          {!loading &&
+          {activePlayers > 1 &&
             players.map((p) => {
               return (
                 <Players
@@ -62,6 +60,24 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
                 />
               );
             })}
+          {activePlayers === 1 && (
+            <div className="flex justify-center gap-8">
+              <div className="w-w256 h-h72 bg-blueLigher rounded-full flex justify-between items-center p-6">
+                <span className="text-blueLight select-none text-lg">Time</span>
+                <span className="font-bold text-3xl select-none text-blue">
+                  00:00
+                </span>
+              </div>
+              <div className="w-w256 h-h72 bg-blueLigher rounded-full flex justify-between items-center p-6">
+                <span className="text-blueLight select-none text-lg">
+                  Moves
+                </span>
+                <span className="font-bold text-3xl select-none text-blue">
+                  0
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -25,6 +25,9 @@ export default {
         gray: "#FCFCFC",
         yellow: "#FDA214",
       },
+      skew: {
+        90: "90deg",
+      },
     },
   },
   plugins: [],
