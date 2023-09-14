@@ -81,14 +81,14 @@ const GamePanel = ({ game }: PropsType) => {
           <h1 className="text-blueLight">Grid Size</h1>
           <div className="flex justify-around gap-3">
             <Button
-              id={1}
+              id={4}
               text={"4x4"}
               width={"w-w134 sm:w-w256"}
               active={activeSize}
               setActive={setActiveSize}
             />
             <Button
-              id={2}
+              id={6}
               text={"6x6"}
               width={"w-w134 sm:w-w256"}
               active={activeSize}

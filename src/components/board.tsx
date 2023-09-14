@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Dots from "./dots";
 
 interface PropsType {
@@ -5,15 +6,40 @@ interface PropsType {
 }
 
 const Board = ({ activeSize }: PropsType) => {
-  console.log(activeSize);
+  const [dataBoard, setDataBoard] = useState([]);
+
+  const calcBoard = () => {
+    const board = [];
+    for (let i = 0; i < activeSize; i++) {
+      board.push(<Dots />);
+    }
+
+    const fullBoard = [];
+
+    for (let x = 0; x < activeSize; x++) {
+      fullBoard.push(board);
+    }
+
+    setDataBoard(fullBoard);
+  };
+
+  useEffect(() => {
+    calcBoard();
+  }, []);
+
+  console.log(dataBoard);
   return (
     <div className="flex flex-col gap-3 w-fit h-fit">
-      <div className="flex gap-3">
-        <Dots />
-        <Dots />
-        <Dots />
-        <Dots />
-      </div>
+      {dataBoard &&
+        dataBoard.map((b, index) => {
+          return (
+            <div key={index} className="flex gap-3">
+              {b.map((r, index) => {
+                return <div key={index}>{r}</div>;
+              })}
+            </div>
+          );
+        })}
     </div>
   );
 };
