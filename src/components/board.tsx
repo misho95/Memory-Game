@@ -8,10 +8,14 @@ interface PropsType {
 const Board = ({ activeSize }: PropsType) => {
   const [dataBoard, setDataBoard] = useState([]);
 
+  const createGameBoardValues = () => {
+    //create board array
+  };
+
   const calcBoard = () => {
     const board = [];
     for (let i = 0; i < activeSize; i++) {
-      board.push(<Dots />);
+      board.push(<Dots value={1} />);
     }
 
     const fullBoard = [];
@@ -25,6 +29,7 @@ const Board = ({ activeSize }: PropsType) => {
 
   useEffect(() => {
     calcBoard();
+    createGameBoardValues();
   }, []);
 
   console.log(dataBoard);
