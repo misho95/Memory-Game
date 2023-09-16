@@ -41,7 +41,9 @@ const Players = ({ id, active, text, score }: PropsType) => {
         </span>
       </div>
       {active === id && (
-        <div className="text-blue text-center font-semibold">Current Turn</div>
+        <div className="text-blue text-center font-semibold hidden sm:block">
+          Current Turn
+        </div>
       )}
     </div>
   );
