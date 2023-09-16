@@ -7,44 +7,58 @@ interface PropsType {
 
 const Board = ({ activeSize }: PropsType) => {
   const [dataBoard, setDataBoard] = useState([]);
+  const [randomGame, setRandomGame] = useState([]);
 
   const createGameBoardValues = () => {
-    //create board array
+    //create board array`
+    const fullBoardDots = activeSize * activeSize;
+    const maxNumberLimits = fullBoardDots / 2;
+    const randomNumBoard = [];
+
+    for (let i = 1; i <= maxNumberLimits; i++) {
+      randomNumBoard.push(i);
+      randomNumBoard.push(i);
+    }
+
+    setRandomGame(randomNumBoard);
   };
 
   const calcBoard = () => {
+    const shuffledGame = [...randomGame];
+    shuffleArray(shuffledGame);
+    console.log(shuffledGame);
+
     const board = [];
-    for (let i = 0; i < activeSize; i++) {
-      board.push(<Dots value={1} />);
+    for (let i = 0; i < activeSize * activeSize; i++) {
+      board.push(<Dots value={shuffledGame[i]} />);
     }
 
-    const fullBoard = [];
-
-    for (let x = 0; x < activeSize; x++) {
-      fullBoard.push(board);
-    }
-
-    setDataBoard(fullBoard);
+    setDataBoard(board);
   };
 
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
   useEffect(() => {
-    calcBoard();
     createGameBoardValues();
   }, []);
 
-  console.log(dataBoard);
+  useEffect(() => {
+    calcBoard();
+  }, [randomGame]);
+
   return (
     <div className="flex flex-col gap-3 w-fit h-fit">
-      {dataBoard &&
-        dataBoard.map((b, index) => {
-          return (
-            <div key={index} className="flex gap-3">
-              {b.map((r, index) => {
-                return <div key={index}>{r}</div>;
-              })}
-            </div>
-          );
-        })}
+      <div className="flex gap-3 flex-wrap w-96">
+        {dataBoard &&
+          dataBoard.map((b, index) => {
+            return <div key={index}>{b}</div>;
+          })}
+      </div>
     </div>
   );
 };

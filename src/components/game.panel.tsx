@@ -12,7 +12,7 @@ interface PropsType {
 const GamePanel = ({ game }: PropsType) => {
   const [activeTheme, setActiveTheme] = useState(1);
   const [activePlayers, setActivePlayers] = useState(1);
-  const [activeSize, setActiveSize] = useState(1);
+  const [activeSize, setActiveSize] = useState(4);
 
   const gameOn = () => {
     game(activeTheme, activePlayers, activeSize);
