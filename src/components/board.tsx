@@ -6,8 +6,8 @@ interface PropsType {
 }
 
 const Board = ({ activeSize }: PropsType) => {
-  const [dataBoard, setDataBoard] = useState([]);
-  const [randomGame, setRandomGame] = useState([]);
+  const [dataBoard, setDataBoard] = useState<JSX.Element[]>([]);
+  const [randomGame, setRandomGame] = useState<number[]>([]);
 
   const createGameBoardValues = () => {
     //create board array`
@@ -26,7 +26,6 @@ const Board = ({ activeSize }: PropsType) => {
   const calcBoard = () => {
     const shuffledGame = [...randomGame];
     shuffleArray(shuffledGame);
-    console.log(shuffledGame);
 
     const board = [];
     for (let i = 0; i < activeSize * activeSize; i++) {
@@ -36,7 +35,7 @@ const Board = ({ activeSize }: PropsType) => {
     setDataBoard(board);
   };
 
-  function shuffleArray(array) {
+  function shuffleArray(array: number[]) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];

@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-const Dots = ({ value }) => {
+interface PropsType {
+  value: number;
+}
+
+const Dots = ({ value }: PropsType) => {
   const [show, setShow] = useState(false);
 
   const showAndHide = () => {
