@@ -52,7 +52,11 @@ const Board = ({ activeSize }: PropsType) => {
 
   return (
     <div className="flex flex-col gap-3 w-fit h-fit">
-      <div className="flex gap-3 flex-wrap w-96">
+      <div
+        className={`flex gap-3 flex-wrap ${
+          activeSize === 4 ? "w-96" : "w-wCalc"
+        } `}
+      >
         {dataBoard &&
           dataBoard.map((b, index) => {
             return <div key={index}>{b}</div>;

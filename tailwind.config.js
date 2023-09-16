@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       width: {
+        wCalc: `calc(82px * 6 + 60px)`,
         w1110: "1110px",
         w654: "654px",
         w327: "327px",
