@@ -24,7 +24,7 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
     console.log(activePlayers);
     const data: playersType[] = [];
     for (let i = 0; i < activePlayers; i++) {
-      data.push({ id: i, player: `player ${i + 1}`, score: 0 });
+      data.push({ id: i, player: `${i + 1}`, score: 0 });
     }
 
     const casterData: playersType[] = data as playersType[];
@@ -45,7 +45,7 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
             </button>
           </div>
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex w-full justify-center items-center">
           <Board activeSize={activeSize} />
         </div>
         <div className="flex justify-center gap-8">
@@ -53,6 +53,7 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
             players.map((p) => {
               return (
                 <Players
+                  key={p.id}
                   id={p.id}
                   active={playerActive}
                   text={p.player}
@@ -62,13 +63,13 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
             })}
           {activePlayers === 1 && (
             <div className="flex justify-center gap-8">
-              <div className="w-w256 h-h72 bg-blueLigher rounded-full flex justify-between items-center p-6">
+              <div className="w-w151 sm:w-w256 h-h72 bg-blueLigher rounded-full flex flex-col sm:flex-row justify-between items-center p-1 sm:p-6">
                 <span className="text-blueLight select-none text-lg">Time</span>
                 <span className="font-bold text-3xl select-none text-blue">
                   00:00
                 </span>
               </div>
-              <div className="w-w256 h-h72 bg-blueLigher rounded-full flex justify-between items-center p-6">
+              <div className="w-w151 sm:w-w256 h-h72 bg-blueLigher rounded-full flex flex-col sm:flex-row justify-between items-center p-1 sm:p-6">
                 <span className="text-blueLight select-none text-lg">
                   Moves
                 </span>

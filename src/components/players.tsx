@@ -7,11 +7,11 @@ interface PropsType {
 
 const Players = ({ id, active, text, score }: PropsType) => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 justify-start items-center">
       <div
-        className={`w-w256 h-h72 ${
+        className={`w-w64 sm:w-w256 h-h78 sm:h-h72 ${
           active === id ? "bg-yellow" : "bg-blueLigher"
-        } rounded-lg flex justify-between items-center p-6 relative`}
+        } rounded-lg flex flex-col sm:flex-row justify-between items-center p-1 sm:p-6 relative`}
       >
         {active === id && (
           <div
@@ -26,7 +26,11 @@ const Players = ({ id, active, text, score }: PropsType) => {
             active === id ? "text-white" : "text-blueLight"
           } select-none text-lg`}
         >
-          {text}
+          <div className="flex">
+            <span className="hidden sm:block">Player</span>
+            <span className=" sm:hidden">P</span>
+            <span>{text}</span>
+          </div>
         </span>
         <span
           className={`font-bold text-3xl ${

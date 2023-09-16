@@ -53,7 +53,9 @@ const Board = ({ activeSize }: PropsType) => {
   return (
     <div className="flex flex-col gap-3 w-fit h-fit">
       <div
-        className={`flex gap-3 flex-wrap 
+        className={` ${
+          activeSize === 4 ? "gap-customGap" : "gap-customGap2"
+        } flex flex-wrap 
         w-w326_8  sm:w-w572`}
       >
         {dataBoard &&
