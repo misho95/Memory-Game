@@ -29,7 +29,7 @@ const Board = ({ activeSize }: PropsType) => {
 
     const board = [];
     for (let i = 0; i < activeSize * activeSize; i++) {
-      board.push(<Dots value={shuffledGame[i]} />);
+      board.push(<Dots value={shuffledGame[i]} activeSize={activeSize} />);
     }
 
     setDataBoard(board);
@@ -53,9 +53,8 @@ const Board = ({ activeSize }: PropsType) => {
   return (
     <div className="flex flex-col gap-3 w-fit h-fit">
       <div
-        className={`flex gap-3 flex-wrap ${
-          activeSize === 4 ? "w-96" : "w-wCalc"
-        } `}
+        className={`flex gap-3 flex-wrap 
+        w-w326_8  sm:w-w572`}
       >
         {dataBoard &&
           dataBoard.map((b, index) => {

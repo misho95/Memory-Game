@@ -33,14 +33,14 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-gray">
-      <div className="flex flex-col w-w1110 gap-10">
+      <div className="flex flex-col w-11/12 md:w-w689 lg:w-w1110 gap-10">
         <div className="flex justify-between">
           <h1 className="text-blue text-xl font-bold select-none">MEMORY</h1>
           <div className="flex gap-3">
-            <button className="bg-yellow w-w127 py-2 rounded-full text-white">
+            <button className="bg-yellow h-10 w-20 md:w-w127 md:h-fit py-2 rounded-full text-white text-sm sm:text-md">
               Restart
             </button>
-            <button className="bg-blueLigher w-w127 py-2 rounded-full text-blue">
+            <button className="bg-blueLigher h-10 w-20 md:w-w127 md:h-fit py-2 rounded-full text-blue text-sm sm:text-md">
               New Game
             </button>
           </div>
