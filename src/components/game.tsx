@@ -8,20 +8,28 @@ interface PropsType {
   activeSize: number;
 }
 
-const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
-  interface playersType {
-    id: number;
-    player: string;
-    score: number;
-  }
+export interface playersType {
+  id: number;
+  player: string;
+  score: number;
+}
 
+const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
   const [players, setPlayers] = useState<playersType[]>([]);
   const [playerActive, setPlayerActive] = useState(0);
+  const [moves, setMoves] = useState(0);
 
-  console.log(activeTheme, setPlayerActive);
+  console.log(activeTheme);
+
+  const changeToNextPlayer = () => {
+    if (players.length > playerActive + 1) {
+      setPlayerActive(playerActive + 1);
+    } else {
+      setPlayerActive(0);
+    }
+  };
 
   useEffect(() => {
-    console.log(activePlayers);
     const data: playersType[] = [];
     for (let i = 0; i < activePlayers; i++) {
       data.push({ id: i, player: `${i + 1}`, score: 0 });
@@ -46,7 +54,16 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
           </div>
         </div>
         <div className="flex w-full justify-center items-center">
-          <Board activeSize={activeSize} />
+          <Board
+            activeSize={activeSize}
+            changeToNextPlayer={changeToNextPlayer}
+            playerActive={playerActive}
+            players={players}
+            setPlayers={setPlayers}
+            activePlayers={activePlayers}
+            moves={moves}
+            setMoves={setMoves}
+          />
         </div>
         <div className="flex justify-center gap-8">
           {activePlayers > 1 &&
@@ -74,7 +91,7 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
                   Moves
                 </span>
                 <span className="font-bold text-3xl select-none text-blue">
-                  0
+                  {moves}
                 </span>
               </div>
             </div>

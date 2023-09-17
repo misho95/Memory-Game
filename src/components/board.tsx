@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 import Dots from "./dots";
 import { v4 } from "uuid";
+import { playersType } from "./game";
 
 interface PropsType {
   activeSize: number;
+  playerActive: number;
+  players: playersType[];
+  setPlayers: (arg: playersType[]) => void;
+  changeToNextPlayer: () => void;
+  activePlayers: number;
+  moves: number;
+  setMoves: (arg: number) => void;
 }
 
 export interface dataBoardType {
@@ -16,9 +24,25 @@ export interface activeDotsType {
   id: string;
 }
 
-const Board = ({ activeSize }: PropsType) => {
+const Board = ({
+  activeSize,
+  playerActive,
+  players,
+  setPlayers,
+  changeToNextPlayer,
+  activePlayers,
+  moves,
+  setMoves,
+}: PropsType) => {
   const [dataBoard, setDataBoard] = useState<dataBoardType[] | null>(null);
   const [activeDots, setActiveDots] = useState<activeDotsType[]>([]);
+
+  const shuffleArray = (array: any[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  };
 
   useEffect(() => {
     const board = [];
@@ -26,12 +50,18 @@ const Board = ({ activeSize }: PropsType) => {
       board.push({ id: v4(), type: "default", value: i + 1 });
       board.push({ id: v4(), type: "default", value: i + 1 });
     }
+    shuffleArray(board);
     setDataBoard(board);
   }, []);
 
   useEffect(() => {
     setTimeout(() => {
       if (activeDots.length === 2) {
+        ///forSinglePlayer
+        if (activePlayers === 1) {
+          setMoves(moves + 1);
+        }
+
         const findFirstDot = dataBoard?.find((d) => {
           if (d.id === activeDots[0].id) {
             return d;
@@ -64,6 +94,20 @@ const Board = ({ activeSize }: PropsType) => {
             if (updateDataBoard) {
               setDataBoard(updateDataBoard);
             }
+
+            /// update players score
+            const updatePlayers = players.map((p) => {
+              if (p.id === playerActive) {
+                return {
+                  ...p,
+                  score: p.score + 1,
+                };
+              } else {
+                return p;
+              }
+            });
+            const casterData: playersType[] = updatePlayers as playersType[];
+            setPlayers(casterData);
           } else {
             const updateDataBoard = dataBoard?.map((x) => {
               if (findFirstDot.id === x.id) {
@@ -87,6 +131,7 @@ const Board = ({ activeSize }: PropsType) => {
           }
         }
         setActiveDots([]);
+        changeToNextPlayer();
       }
     }, 1000);
   }, [activeDots]);

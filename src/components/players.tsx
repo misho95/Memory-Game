@@ -34,7 +34,7 @@ const Players = ({ id, active, text, score }: PropsType) => {
         </span>
         <span
           className={`font-bold text-3xl ${
-            active ? "text-white" : "text-blue"
+            active === id ? "text-white" : "text-blue"
           } select-none`}
         >
           {score}
