@@ -1,18 +1,42 @@
-import { useState } from "react";
+import { activeDotsType, dataBoardType } from "./board";
 
 interface PropsType {
+  id: string;
   value: number;
   activeSize: number;
+  activeDots: activeDotsType[];
+  setActiveDots: (arg: activeDotsType[]) => void;
+  type: string;
+  dataBoard: dataBoardType[];
+  setDataBoard: (arg: dataBoardType[]) => void;
 }
 
-const Dots = ({ value, activeSize }: PropsType) => {
-  const [show, setShow] = useState(false);
-
+const Dots = ({
+  id,
+  value,
+  activeSize,
+  activeDots,
+  setActiveDots,
+  type,
+  dataBoard,
+  setDataBoard,
+}: PropsType) => {
   const showAndHide = () => {
-    setShow(true);
-    setTimeout(() => {
-      setShow(false);
-    }, 2000);
+    if (activeDots.length < 2) {
+      setActiveDots([...activeDots, { id }]);
+
+      const updateType: dataBoardType[] = dataBoard.map((data) => {
+        if (data.id === id) {
+          return {
+            ...data,
+            type: "flip",
+          };
+        } else {
+          return data;
+        }
+      });
+      setDataBoard(updateType);
+    }
   };
 
   return (
@@ -24,13 +48,15 @@ const Dots = ({ value, activeSize }: PropsType) => {
       } relaitve overflow-hidden rounded-full `}
     >
       <div
-        onClick={showAndHide}
+        onClick={() => {
+          type === "default" && showAndHide();
+        }}
         className={`${
           activeSize === 4
             ? "w-w72_5 h-h72_5 sm:w-w118 sm:h-h118"
             : " w-w46_8 h-h46_8 sm:w-w82 sm:h-h82"
         } rounded-full  absolute ${
-          show ? "bg-transparent" : "bg-blue"
+          type !== "default" ? "bg-transparent" : "bg-blue"
         } duration-500`}
       ></div>
 
@@ -39,7 +65,13 @@ const Dots = ({ value, activeSize }: PropsType) => {
           activeSize === 4
             ? "w-w72_5 h-h72_5 sm:w-w118 sm:h-h118"
             : " w-w46_8 h-h46_8 sm:w-w82 sm:h-h82"
-        } rounded-full bg-yellow text-white flex justify-center items-center text-2xl sm:text-5xl select-none`}
+        } rounded-full ${
+          type === "flip"
+            ? "bg-yellow"
+            : type === "match"
+            ? "bg-blueLigher"
+            : ""
+        } text-white flex justify-center items-center text-2xl sm:text-5xl select-none`}
       >
         {value}
       </div>
