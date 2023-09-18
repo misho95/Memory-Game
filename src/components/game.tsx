@@ -6,6 +6,7 @@ interface PropsType {
   activeTheme: number;
   activePlayers: number;
   activeSize: number;
+  setGame: (arg: boolean) => void;
 }
 
 export interface playersType {
@@ -14,10 +15,16 @@ export interface playersType {
   score: number;
 }
 
-const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
+const Game = ({
+  setGame,
+  activeTheme,
+  activePlayers,
+  activeSize,
+}: PropsType) => {
   const [players, setPlayers] = useState<playersType[]>([]);
   const [playerActive, setPlayerActive] = useState(0);
   const [moves, setMoves] = useState(0);
+  const [restart, setRestart] = useState(false);
 
   console.log(activeTheme);
 
@@ -29,15 +36,34 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
     }
   };
 
-  useEffect(() => {
-    const data: playersType[] = [];
-    for (let i = 0; i < activePlayers; i++) {
-      data.push({ id: i, player: `${i + 1}`, score: 0 });
-    }
+  const restartHandler = () => {
+    setRestart(false);
+    setPlayers([]);
+    setPlayerActive(0);
+    setMoves(0);
+  };
 
-    const casterData: playersType[] = data as playersType[];
-    setPlayers(casterData);
-  }, [activePlayers]);
+  const restartBoard = (setDataBoard, setActiveDots) => {
+    setDataBoard(null), setActiveDots([]);
+  };
+
+  const restartAndRedirect = () => {
+    restartHandler();
+    setGame(false);
+  };
+
+  useEffect(() => {
+    if (!restart) {
+      const data: playersType[] = [];
+      for (let i = 0; i < activePlayers; i++) {
+        data.push({ id: i, player: `${i + 1}`, score: 0 });
+      }
+
+      const casterData: playersType[] = data as playersType[];
+      setPlayers(casterData);
+      setRestart(true);
+    }
+  }, [activePlayers, players, moves]);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-gray">
@@ -45,10 +71,16 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
         <div className="flex justify-between">
           <h1 className="text-blue text-xl font-bold select-none">MEMORY</h1>
           <div className="flex gap-3">
-            <button className="bg-yellow h-10 w-20 md:w-w127 md:h-fit py-2 rounded-full text-white text-sm sm:text-md">
+            <button
+              onClick={restartHandler}
+              className="bg-yellow h-10 w-20 md:w-w127 md:h-fit py-2 rounded-full text-white text-sm sm:text-md"
+            >
               Restart
             </button>
-            <button className="bg-blueLigher h-10 w-20 md:w-w127 md:h-fit py-2 rounded-full text-blue text-sm sm:text-md">
+            <button
+              onClick={restartAndRedirect}
+              className="bg-blueLigher h-10 w-20 md:w-w127 md:h-fit py-2 rounded-full text-blue text-sm sm:text-md"
+            >
               New Game
             </button>
           </div>
@@ -63,6 +95,8 @@ const Game = ({ activeTheme, activePlayers, activeSize }: PropsType) => {
             activePlayers={activePlayers}
             moves={moves}
             setMoves={setMoves}
+            restartBoard={restartBoard}
+            restart={restart}
           />
         </div>
         <div className="flex justify-center gap-8">

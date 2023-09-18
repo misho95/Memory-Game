@@ -27,6 +27,7 @@ function App() {
           activeTheme={activeTheme}
           activePlayers={activePlayers}
           activeSize={activeSize}
+          setGame={setGame}
         />
       )}
     </>

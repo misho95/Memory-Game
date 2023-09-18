@@ -12,6 +12,8 @@ interface PropsType {
   activePlayers: number;
   moves: number;
   setMoves: (arg: number) => void;
+  restartBoard: () => void;
+  restart: boolean;
 }
 
 export interface dataBoardType {
@@ -33,6 +35,8 @@ const Board = ({
   activePlayers,
   moves,
   setMoves,
+  restartBoard,
+  restart,
 }: PropsType) => {
   const [dataBoard, setDataBoard] = useState<dataBoardType[] | null>(null);
   const [activeDots, setActiveDots] = useState<activeDotsType[]>([]);
@@ -44,15 +48,27 @@ const Board = ({
     }
   };
 
+  const callRestartHandler = () => {
+    restartBoard(setDataBoard, setActiveDots);
+  };
+
   useEffect(() => {
-    const board = [];
-    for (let i = 0; i < (activeSize * activeSize) / 2; i++) {
-      board.push({ id: v4(), type: "default", value: i + 1 });
-      board.push({ id: v4(), type: "default", value: i + 1 });
+    if (!restart) {
+      callRestartHandler();
     }
-    shuffleArray(board);
-    setDataBoard(board);
-  }, []);
+  }, [restart]);
+
+  useEffect(() => {
+    if (!dataBoard) {
+      const board = [];
+      for (let i = 0; i < (activeSize * activeSize) / 2; i++) {
+        board.push({ id: v4(), type: "default", value: i + 1 });
+        board.push({ id: v4(), type: "default", value: i + 1 });
+      }
+      shuffleArray(board);
+      setDataBoard(board);
+    }
+  }, [dataBoard]);
 
   useEffect(() => {
     setTimeout(() => {
