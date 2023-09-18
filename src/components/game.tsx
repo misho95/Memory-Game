@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Board from "./board";
+import Board, { activeDotsType, dataBoardType } from "./board";
 import Players from "./players";
 
 interface PropsType {
@@ -43,7 +43,10 @@ const Game = ({
     setMoves(0);
   };
 
-  const restartBoard = (setDataBoard, setActiveDots) => {
+  const restartBoard = (
+    setDataBoard: (arg: dataBoardType[] | null) => void,
+    setActiveDots: (arg: activeDotsType[] | []) => void
+  ) => {
     setDataBoard(null), setActiveDots([]);
   };
 

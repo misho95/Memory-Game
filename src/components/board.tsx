@@ -12,7 +12,10 @@ interface PropsType {
   activePlayers: number;
   moves: number;
   setMoves: (arg: number) => void;
-  restartBoard: () => void;
+  restartBoard: (
+    setDataBoard: (arg: dataBoardType[] | null) => void,
+    setActiveDots: (arg: activeDotsType[] | []) => void
+  ) => void;
   restart: boolean;
 }
 
@@ -39,7 +42,7 @@ const Board = ({
   restart,
 }: PropsType) => {
   const [dataBoard, setDataBoard] = useState<dataBoardType[] | null>(null);
-  const [activeDots, setActiveDots] = useState<activeDotsType[]>([]);
+  const [activeDots, setActiveDots] = useState<activeDotsType[] | []>([]);
 
   const shuffleArray = (array: any[]) => {
     for (let i = array.length - 1; i > 0; i--) {
