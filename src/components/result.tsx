@@ -62,12 +62,12 @@ const Result = ({
                 <span className="text-blue text-xl font-semibold">{moves}</span>
               </div>
             </div>
-            <div className="flex justify-between gap-5">
+            <div className="flex flex-col sm:flex-row justify-between gap-5">
               <button
                 onClick={() => {
                   restartHandler(), setShow(false);
                 }}
-                className="bg-yellow h-10 w-20 md:w-w127 md:h-fit py-2 rounded-full text-white text-sm sm:text-md"
+                className="bg-yellow h-10 sm:w-20 md:w-w127 md:h-fit py-2 rounded-full text-white text-sm sm:text-md w-full"
               >
                 Restart
               </button>
@@ -75,7 +75,7 @@ const Result = ({
                 onClick={() => {
                   restartAndRedirect(), setShow(false);
                 }}
-                className="bg-blueLigher h-10 w-20 md:w-w127 md:h-fit py-2 rounded-full text-blue text-sm sm:text-md"
+                className="bg-blueLigher h-10 sm:w-20 md:w-w127 md:h-fit py-2 rounded-full text-blue text-sm sm:text-md w-full"
               >
                 New Game
               </button>
@@ -107,12 +107,12 @@ const Result = ({
                 );
               })}
             </div>
-            <div className="flex justify-between gap-5">
+            <div className="flex flex-col sm:flex-row justify-between gap-5">
               <button
                 onClick={() => {
                   restartHandler(), setShow(false);
                 }}
-                className="bg-yellow h-10 w-20 md:w-w127 md:h-fit py-2 rounded-full text-white text-sm sm:text-md"
+                className="bg-yellow h-10 sm:w-20 md:w-w127 md:h-fit py-2 rounded-full text-white text-sm sm:text-md w-full"
               >
                 Restart
               </button>
@@ -120,7 +120,7 @@ const Result = ({
                 onClick={() => {
                   restartAndRedirect(), setShow(false);
                 }}
-                className="bg-blueLigher h-10 w-20 md:w-w127 md:h-fit py-2 rounded-full text-blue text-sm sm:text-md"
+                className="bg-blueLigher h-10 sm:w-20 md:w-w127 md:h-fit py-2 rounded-full text-blue text-sm sm:text-md w-full"
               >
                 New Game
               </button>
