@@ -123,7 +123,7 @@ const Game = ({
           time={{ minuts, seconds }}
         />
       )}
-      <div className="w-full min-h-screen flex justify-center items-center bg-gray">
+      <div className="w-full min-h-screen flex justify-center items-normal pt-10 sm:pt-0 sm: sm:items-center bg-gray">
         <div className="flex flex-col w-11/12 md:w-w689 lg:w-w1110 gap-10">
           <div className="flex justify-between">
             <h1 className="text-blue text-xl font-bold select-none">MEMORY</h1>

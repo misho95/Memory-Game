@@ -19,7 +19,7 @@ const GamePanel = ({ game }: PropsType) => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-blue flex flex-col gap-10 justify-center items-center">
+    <div className="w-full min-h-screen bg-blue flex flex-col gap-10 justify-normal pt-10 sm:pt-0 sm:justify-center items-center">
       <h1 className="text-center text-xl text-gray select-none">MEMORY</h1>
       <div className="bg-gray p-10 rounded-lg w-w327 sm:w-w654 flex flex-col gap-6">
         {/* //selectTheme */}
