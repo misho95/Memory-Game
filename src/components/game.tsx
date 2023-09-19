@@ -28,8 +28,6 @@ const Game = ({
   const [restart, setRestart] = useState(false);
   const [show, setShow] = useState(false);
 
-  console.log(activeTheme);
-
   const changeToNextPlayer = () => {
     if (players.length > playerActive + 1) {
       setPlayerActive(playerActive + 1);
@@ -116,6 +114,7 @@ const Game = ({
               restartBoard={restartBoard}
               restart={restart}
               showResult={showResult}
+              activeTheme={activeTheme}
             />
           </div>
           <div className="flex justify-center gap-8">

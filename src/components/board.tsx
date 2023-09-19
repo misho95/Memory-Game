@@ -18,12 +18,14 @@ interface PropsType {
   ) => void;
   restart: boolean;
   showResult: () => void;
+  activeTheme: number;
 }
 
 export interface dataBoardType {
   id: string;
   type: string;
-  value: number;
+  icons: boolean;
+  value: number | string;
 }
 
 export interface activeDotsType {
@@ -42,9 +44,11 @@ const Board = ({
   restartBoard,
   restart,
   showResult,
+  activeTheme,
 }: PropsType) => {
   const [dataBoard, setDataBoard] = useState<dataBoardType[] | null>(null);
   const [activeDots, setActiveDots] = useState<activeDotsType[] | []>([]);
+  const iconsArray = [];
 
   const shuffleArray = (array: any[]) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -78,8 +82,23 @@ const Board = ({
     if (!dataBoard) {
       const board = [];
       for (let i = 0; i < (activeSize * activeSize) / 2; i++) {
-        board.push({ id: v4(), type: "default", value: i + 1 });
-        board.push({ id: v4(), type: "default", value: i + 1 });
+        if (activeTheme === 1) {
+          board.push({ id: v4(), type: "default", icons: false, value: i + 1 });
+          board.push({ id: v4(), type: "default", icons: false, value: i + 1 });
+        } else {
+          board.push({
+            id: v4(),
+            type: "default",
+            icons: true,
+            value: "fa-facebook",
+          });
+          board.push({
+            id: v4(),
+            type: "default",
+            icons: true,
+            value: "fa-facebook",
+          });
+        }
       }
       shuffleArray(board);
       setDataBoard(board);
@@ -184,6 +203,7 @@ const Board = ({
                 id={b.id}
                 type={b.type}
                 value={b.value}
+                icons={b.icons}
                 activeSize={activeSize}
                 activeDots={activeDots}
                 setActiveDots={setActiveDots}

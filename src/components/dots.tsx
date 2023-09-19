@@ -1,8 +1,10 @@
 import { activeDotsType, dataBoardType } from "./board";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface PropsType {
   id: string;
-  value: number;
+  value: number | string;
+  icons: boolean;
   activeSize: number;
   activeDots: activeDotsType[];
   setActiveDots: (arg: activeDotsType[]) => void;
@@ -14,6 +16,7 @@ interface PropsType {
 const Dots = ({
   id,
   value,
+  icons,
   activeSize,
   activeDots,
   setActiveDots,
@@ -73,7 +76,7 @@ const Dots = ({
             : ""
         } text-white flex justify-center items-center text-2xl sm:text-5xl select-none`}
       >
-        {value}
+        {icons ? <span>icons</span> : <span>{value}</span>}
       </div>
     </div>
   );
