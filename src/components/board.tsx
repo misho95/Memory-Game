@@ -48,7 +48,26 @@ const Board = ({
 }: PropsType) => {
   const [dataBoard, setDataBoard] = useState<dataBoardType[] | null>(null);
   const [activeDots, setActiveDots] = useState<activeDotsType[] | []>([]);
-  const iconsArray = [];
+  const iconsArray = [
+    "favorite",
+    "star",
+    "face",
+    "face_2",
+    "face_3",
+    "face_4",
+    "emoji_objects",
+    "psychology",
+    "forest",
+    "rocket",
+    "bedtime",
+    "skull",
+    "lock",
+    "celebration",
+    "pan_tool",
+    "anchor",
+    "contrast",
+    "moon",
+  ];
 
   const shuffleArray = (array: any[]) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -90,13 +109,13 @@ const Board = ({
             id: v4(),
             type: "default",
             icons: true,
-            value: "fa-facebook",
+            value: iconsArray[i],
           });
           board.push({
             id: v4(),
             type: "default",
             icons: true,
-            value: "fa-facebook",
+            value: iconsArray[i],
           });
         }
       }
