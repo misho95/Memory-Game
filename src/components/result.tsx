@@ -54,7 +54,8 @@ const Result = ({
               <div className="bg-blueLigher p-2 rounded-lg flex justify-between gap-5">
                 <span className="text-blueLight">Time Elapsed</span>
                 <span className="text-blue text-xl font-semibold">
-                  {time.minuts}:{time.seconds}
+                  {time.minuts}:
+                  {time.seconds < 9 ? `0:${time.seconds}` : time.seconds}
                 </span>
               </div>
               <div className="bg-blueLigher p-2 rounded-lg flex justify-between gap-5">
