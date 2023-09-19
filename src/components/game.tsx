@@ -27,7 +27,6 @@ const Game = ({
   const [moves, setMoves] = useState(0);
   const [restart, setRestart] = useState(false);
   const [show, setShow] = useState(false);
-  const [resultsData, setResultsData] = useState<dataBoardType[] | null>(null);
 
   console.log(activeTheme);
 
@@ -77,7 +76,14 @@ const Game = ({
 
   return (
     <>
-      {show && <Result players={players} />}
+      {show && (
+        <Result
+          players={players}
+          setShow={setShow}
+          restartHandler={restartHandler}
+          restartAndRedirect={restartAndRedirect}
+        />
+      )}
       <div className="w-full min-h-screen flex justify-center items-center bg-gray">
         <div className="flex flex-col w-11/12 md:w-w689 lg:w-w1110 gap-10">
           <div className="flex justify-between">
